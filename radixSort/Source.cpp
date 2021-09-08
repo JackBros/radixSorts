@@ -1,6 +1,6 @@
 #include <iostream>
 #include "RadixSorts.h"
-#include "Rands.h"
+#include "RandAndTimers.h"
 
 using std::cout;
 using std::endl;

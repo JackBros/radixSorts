@@ -23,7 +23,7 @@
     <ClInclude Include="RadixSorts.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rands.h">
+    <ClInclude Include="RandAndTimers.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
