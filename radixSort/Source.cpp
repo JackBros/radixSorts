@@ -1,84 +1,153 @@
 #include <iostream>
 #include "RadixSorts.h"
 #include "RandAndTimers.h"
+#include <fstream>
+#include <stdio.h>
+#include <sstream>
+#include <conio.h>
+#include <locale.h>
+#include <stdlib.h>
+#include <string.h>
+#include <string>
+#include <typeinfo>
 
 using std::cout;
 using std::endl;
+using namespace std;
 
-#define length 10000000
-
-void testUnsignedIntSort() {
-	unsigned int* unsignedIntArr = new unsigned int[length];
-
-	for (int i = 0; i < length; i++)
-		unsignedIntArr[i] = intRand();
-
-	startTimer();
-	unsignedIntRadixSort(unsignedIntArr, length);
-	cout << "unsigned int sort took " << stopTimer() << " seconds" << endl;
-
-	for (int i = 1; i < length; i++)
-		if (unsignedIntArr[i - 1] < unsignedIntArr[i])
-			cout << "Error, " << unsignedIntArr[i - 1] << " < " << unsignedIntArr[i] << endl;
-
-	delete[] unsignedIntArr;
-}
-
-void testIntSort() {
-	int* intArr = new int[length];
-
-	for (int i = 0; i < length; i++)
-		intArr[i] = intRand();
-
-	startTimer();
-	intRadixSort(intArr, length);
-	cout << "int sort took " << stopTimer() << " seconds" << endl;
-
-	for (int i = 1; i < length; i++)
-		if (intArr[i - 1] < intArr[i])
-			cout << "Error, " << intArr[i - 1] << " < " << intArr[i] << endl;
-
-	delete[] intArr;
-}
+//#define length 10
 
 void testFloatSort() {
+	int diziSec, length;
+	flag1:
+	cout << "1) 10'luk dizi" << endl;
+	cout << "2) 100'luk dizi" << endl;
+	cout << "3) 100000'lik dizi" << endl;
+	cin >> diziSec;
+	cout << "--------------------------------------------------------------------" << endl;
+	if (diziSec == 1) {
+		length = 10;
 
-	float* floatArr = new float[length];
+		float* floatArr = new float[length];
+		float sayi1;
+		int dosya1Elemansayisi = 0;
+		ifstream dosyaOku("10lukliste.txt");
+		string karakter;
 
-	for (int i = 0; i < length; i++)
-		floatArr[i] = 100 * (doubleRand() - 0.5);
+		if (dosyaOku.is_open()) {
 
-	startTimer();
-	floatRadixSort(floatArr, length);
-	cout << "float sort took " << stopTimer() << " seconds" << endl;
+		} while (dosya1Elemansayisi != 10) {
+			dosyaOku >> karakter;
+			sayi1 = stof(karakter);
+			floatArr[dosya1Elemansayisi] = sayi1;
+			dosya1Elemansayisi++;
+		}
 
-	for (int i = 1; i < length; i++)
-		if (floatArr[i - 1] < floatArr[i])
-			cout << "Error, " << floatArr[i - 1] << " < " << floatArr[i] << endl;
+		dosyaOku.close();
 
-	delete[] floatArr;
+		startTimer();
+		floatRadixSort(floatArr, length);
+		cout << "float sort took " << stopTimer() << " seconds" << endl;
+		for (int y = 0; y < 10; y++) {
+			cout << floatArr[y] << endl;
+		}
+		for (int i = 1; i < length; i++)
+			if (floatArr[i - 1] < floatArr[i])
+				cout << "Error, " << floatArr[i - 1] << " < " << floatArr[i] << endl;
+
+		delete[] floatArr;
+		
+	}
+	else if (diziSec == 2)
+	{
+		length = 100;
+
+		float* floatArr = new float[length];
+		float sayi1;
+		int dosya1Elemansayisi = 0;
+		ifstream dosyaOku("100lükliste.txt");
+		string karakter;
+
+		if (dosyaOku.is_open()) {
+
+		} while (dosya1Elemansayisi != 100) {
+			dosyaOku >> karakter;
+			sayi1 = stof(karakter);
+			floatArr[dosya1Elemansayisi] = sayi1;
+			dosya1Elemansayisi++;
+		}
+
+		dosyaOku.close();
+
+		startTimer();
+		floatRadixSort(floatArr, length);
+		cout << "float sort took " << stopTimer() << " seconds" << endl;
+		for (int y = 0; y < 100; y++) {
+			cout << floatArr[y] << endl;
+		}
+		for (int i = 1; i < length; i++)
+			if (floatArr[i - 1] < floatArr[i])
+				cout << "Error, " << floatArr[i - 1] << " < " << floatArr[i] << endl;
+
+		delete[] floatArr;
+	}
+	else if (diziSec == 3) {
+		length = 100000;
+
+		float* floatArr = new float[length];
+		float sayi1;
+		int dosya1Elemansayisi = 0;
+		ifstream dosyaOku("100000likliste.txt");
+		string karakter;
+
+		if (dosyaOku.is_open()) {
+
+		} while (dosya1Elemansayisi != 100000) {
+			dosyaOku >> karakter;
+			sayi1 = stof(karakter);
+			floatArr[dosya1Elemansayisi] = sayi1;
+			dosya1Elemansayisi++;
+		}
+
+		dosyaOku.close();
+
+		startTimer();
+		floatRadixSort(floatArr, length);
+		cout << "float sort took " << stopTimer() << " seconds" << endl;
+		for (int y = 0; y < 100000; y++) {
+			cout << floatArr[y] << endl;
+		}
+		for (int i = 1; i < length; i++)
+			if (floatArr[i - 1] < floatArr[i])
+				cout << "Error, " << floatArr[i - 1] << " < " << floatArr[i] << endl;
+
+		delete[] floatArr;
+	}
+	else
+	{
+		cout << "Hatali Secim!!" << endl;
+		goto flag1;
+	}
 }
 
-void testDoubleSort() {
-	double* doubleArr = new double[length];
-
-	for (int i = 0; i < length; i++)
-		doubleArr[i] = 100 * (doubleRand() - 0.5);
-
-	startTimer();
-	doubleRadixSort(doubleArr, length);
-	cout << "double sort took " << stopTimer() << " seconds" << endl;
-
-	for (int i = 1; i < length; i++)
-		if (doubleArr[i - 1] < doubleArr[i])
-			cout << "Error, " << doubleArr[i - 1] << " < " << doubleArr[i] << endl;
-
-	delete[] doubleArr;
-}
 
 void main() {
-	testUnsignedIntSort();
-	testIntSort();
 	testFloatSort();
-	testDoubleSort();
+	int secimEkrani;
+flag2:
+	cout << "--------------------------------------------------------------------" << endl;
+	cout << "1) Cikis" << endl;
+	cout << "2)Tekrar Secim" << endl;
+	cin >> secimEkrani;
+	if (secimEkrani == 2) {
+		testFloatSort();
+		goto flag2;
+	}
+	else if (secimEkrani == 1) {
+		exit(0);
+	}
+	else {
+		cout << "Hatali Secim!!" << endl;
+		goto flag2;
+	}
 }
